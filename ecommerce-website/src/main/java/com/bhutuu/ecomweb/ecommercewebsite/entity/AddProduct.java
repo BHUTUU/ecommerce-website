@@ -15,9 +15,9 @@ public class AddProduct {
     private String productDescription;
     // @Lob
     // private byte[] productImage;
-    public String getProductName() {
-        return productName;
-    }
+    // public String getProductName() {
+    //     return productName;
+    // }
     public void setProductName(String productName) {
         this.productName = productName;
     }

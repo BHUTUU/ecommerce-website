@@ -24,16 +24,25 @@ public class AddProductController {
                             @RequestParam("productPrice") String productPrice,
                             @RequestParam("productCategory") String productCategory,
                             @RequestParam("productQuantity") String productQuantity,
-                            @RequestParam("productDescription") String productDescription) {
+                            @RequestParam("productDescription") String productDescription
+                            // @RequestParam("productImage")  MultipartFile productImage
+                            ) {
 
-        AddProduct product = new AddProduct();
-        product.setProductName(productName);
-        product.setProductBrand(productBrand);
-        product.setProductPrice(productPrice);
-        product.setProductCategory(productCategory);
-        product.setProductQuantity(productQuantity);
-        product.setProductDescription(productDescription);
-        addProductService.saveProduct(product);
-        return "Product Uploaded successfully";
+        // try {
+            // byte[] productImageBytes = productImage.getBytes();
+            AddProduct product = new AddProduct();
+            product.setProductName(productName);
+            product.setProductBrand(productBrand);
+            product.setProductPrice(productPrice);
+            product.setProductCategory(productCategory);
+            product.setProductQuantity(productQuantity);
+            product.setProductDescription(productDescription);
+            // product.setProductImage(productImageBytes);
+            addProductService.saveProduct(product);
+            return "Product Uploaded successfully";
+        // } catch (IOException e) {
+        //     e.printStackTrace(); //println
+        //     return "All parameters are mandatory! try again!";
+        // }
     }
 }
