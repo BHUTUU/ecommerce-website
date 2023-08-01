@@ -19,7 +19,7 @@ public class AddProductController {
     private AddProductService addProductService;
 
     @PostMapping("/saveProduct")
-    public String saveProduct(@RequestParam("productName") String productName,
+    public boolean saveProduct(@RequestParam("productName") String productName,
                             @RequestParam("productBrand") String productBrand,
                             @RequestParam("productPrice") String productPrice,
                             @RequestParam("productCategory") String productCategory,
@@ -39,7 +39,7 @@ public class AddProductController {
             product.setProductDescription(productDescription);
             // product.setProductImage(productImageBytes);
             addProductService.saveProduct(product);
-            return "Product Uploaded successfully";
+            return true;
         // } catch (IOException e) {
         //     e.printStackTrace(); //println
         //     return "All parameters are mandatory! try again!";
