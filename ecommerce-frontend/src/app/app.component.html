@@ -1,29 +1,29 @@
 
-  <form (ngSubmit)="onSubmit()" class="container">
+  <form #productForm="ngForm" enctype="multipart/form-data" (ngSubmit)="onSubmit(productForm)" class="container">
     <h1>Add Products</h1>
     <mat-form-field>
       <mat-label>Product Name</mat-label>
-      <input matInput [(ngModel)]="productName" [ngModelOptions]="{standalone: true}">
+      <input matInput #productName="ngModel" [(ngModel)]="product.productName"  [ngModelOptions]="{standalone: true}"  required>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Product Brand</mat-label>
-      <input matInput [(ngModel)]="productBrand" [ngModelOptions]="{standalone: true}">
+      <input matInput #productBrand="ngModel" [(ngModel)]="product.productBrand"  [ngModelOptions]="{standalone: true}"  required>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Product Category</mat-label>
-      <input matInput [(ngModel)]="productCategory" [ngModelOptions]="{standalone: true}">
+      <input matInput #productCategory="ngModel" [(ngModel)]="product.productCategory"  [ngModelOptions]="{standalone: true}"  required>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Product Quantity</mat-label>
-      <input matInput [(ngModel)]="productQuantity" [ngModelOptions]="{standalone: true}">
+      <input matInput #productQuantity="ngModel" [(ngModel)]="product.productQuantity"  [ngModelOptions]="{standalone: true}"  required>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Product Price</mat-label>
-      <input matInput [(ngModel)]="productPrice" [ngModelOptions]="{standalone: true}">
+      <input matInput #productPrice="ngModel" [(ngModel)]="product.productPrice"  [ngModelOptions]="{standalone: true}"  required>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Product Description</mat-label>
-      <input matInput [(ngModel)]="productDescription" [ngModelOptions]="{standalone: true}">
+      <input matInput #productDescription="ngModel" [(ngModel)]="product.productDescription"  [ngModelOptions]="{standalone: true}"  required>
   </mat-form-field>
   <button mat-button type="submit" class="btn">Add</button>
 </form>

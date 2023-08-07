@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Product } from './models/Product.model';
+import { FormGroup, NgForm } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -8,35 +11,42 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'ecommerce-frontend';
-  productName: string='';
-  productBrand: string='';
-  productCategory: string='';
-  productQuantity: string='';
-  productPrice: string='';
-  productDescription: string='';
-
-  constructor(private http: HttpClient) {}
-
-  onSubmit() {
-    const params = new URLSearchParams();
-    params.append('productName', this.productName);
-    params.append('productBrand', this.productBrand);
-    params.append('productCategory', this.productCategory);
-    params.append('productQuantity', this.productQuantity.toString()); // Convert number to string
-    params.append('productPrice', this.productPrice.toString()); // Convert number to string
-    params.append('productDescription', this.productDescription);
-  
-    this.http.post('http://localhost:8383/saveProduct?' + params.toString(), null)
-      .subscribe(
-        response => {
-          console.log('Product added successfully:', response);
-          alert('Product added successfully');
-        },
-        error => {
-          console.error('Error adding product:', error);
-          alert("Error adding product");
-        }
-      );
+  product: Product = {
+    productName: "",
+    productBrand: "",
+    productCategory: "",
+    productQuantity: "",
+    productPrice: "",
+    productDescription: ""
   }
-  
+
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
+  productForm!: FormGroup;
+  prepareFormData(product: Product):FormData{
+    const formData=new FormData();
+    
+      formData.append('product',
+      new Blob([JSON.stringify(product)], {type:'application/json'}));
+    return formData;
+    
+  }
+  onSubmit(productForm:NgForm) {
+    const postData=this.prepareFormData(this.product);
+  //console.log(this.leaseagreementdetails)
+      //const formData = this.toFormData(this.leaseagreementdetailsForm.value);
+      //formData.append('file', this.photos[0], this.photos[0].name);
+      //const formdata=this.leaseagreementdetailsForm.value;
+      this.addLeaseDetails(postData).subscribe({
+        next: (response: Product) => console.log(response),
+        error: (error: HttpErrorResponse) => console.error(error),
+        complete: () => this['snackBar'].open('ProductDetails Added Successfully', 'Ok', {
+          duration: 5000
+        
+        })
+      })
+    }
+    public addLeaseDetails(product:FormData)
+    {
+      return this.http.post<Product>('http://localhost:8383/saveProduct',product)
+    }  
 }

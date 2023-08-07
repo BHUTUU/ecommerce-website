@@ -11,11 +11,6 @@ public class AddProductService {
     @Autowired
     private  AddProductDao addProductDao;
 
-    // @Autowired
-    // public AddProductService(AddProductDao addProductDao) {
-    //     this.addProductDao = addProductDao;
-    // }
-
     public AddProduct saveProduct(AddProduct product) {
 
         return addProductDao.save(product);
