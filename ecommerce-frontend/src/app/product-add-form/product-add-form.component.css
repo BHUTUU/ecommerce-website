@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    align-self: left;
+    justify-content: left;
+    margin-left: 2%;
+    margin-right: 40%;
+}
+.btn {
+    height: 2rem;
+    width: 4rem;
+}
